@@ -1,0 +1,24 @@
+{
+  "name": "livesplit-one-wrapper",
+  "version": "1.0.0",
+  "description": "GUI Wrapper around LiveSplit One",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "electron": "`npm bin`/electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevensmedia/livesplit-one-wrapper.git"
+  },
+  "author": "Neil Stevens",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevensmedia/livesplit-one-wrapper/issues"
+  },
+  "homepage": "https://github.com/stevensmedia/livesplit-one-wrapper#readme",
+  "devDependencies": {
+    "electron": "^2.0.4",
+    "mocha": "^5.2.0"
+  }
+}
