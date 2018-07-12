@@ -1,5 +1,3 @@
-- Set a good default window size
-- Save window size
 - override the CSS for the menu somehow?
 - Create a packaging process in a gruntfile
 - Load/save config
