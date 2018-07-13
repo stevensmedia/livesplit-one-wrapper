@@ -1,4 +1,3 @@
-- Create a packaging process in a gruntfile
 - override the CSS for the menu somehow?
 - Load/save config
 - Load/save splits
