@@ -14,7 +14,6 @@ electron.app.on('ready', function() {
 		height: size ? size[1] : 800,
 		title: "LiveSplit One",
 		icon: path.join(__dirname, 'icon.png'),
-		frame: false,
 	});
 
 	view = win.getBrowserView();
