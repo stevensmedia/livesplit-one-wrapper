@@ -23,7 +23,7 @@ electron.app.on('ready', function() {
 			const path = require('path');
 			const remote = require('electron').remote;
 			var app = remote.app;
-			require(path.join(app.getAppPath(), './oob.js'));
+			require(path.join(app.getAppPath(), 'oob.js'));
 		`);
 	});
 
