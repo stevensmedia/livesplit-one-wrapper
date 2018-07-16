@@ -16,8 +16,6 @@ app.on('ready', function() {
 		icon: path.join(__dirname, 'icon.png'),
 	});
 
-	view = win.getBrowserView();
-
 	win.webContents.on('dom-ready', function() {
 		win.webContents.executeJavaScript(`
 			const path = require('path');
