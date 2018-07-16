@@ -10,7 +10,7 @@ function applyStyle() {
 	$('.buttons > .small').css('display', 'inline-block');
 	$('.buttons > .small').css('width', '48%');
 	$('.buttons > .small > button').css('width', '48%');
-	$('svg.Timer0').attr('viewBox', '0 0 299 60')
+	$('svg.Timer0').attr('viewBox', '0 0 300 60')
 	               .attr('preserveAspectRatio', 'xMaxYMin meet')
 	               .css('width', '100%');
 }
