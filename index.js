@@ -5,7 +5,7 @@ const path = require('path')
 var app = electron.app;
 var win;
 
-electron.app.on('ready', function() {
+app.on('ready', function() {
 	app.dock.setIcon(path.join(__dirname, 'icon.png'));
 	var size = settings.get('size');
 
