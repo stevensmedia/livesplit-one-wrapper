@@ -29,6 +29,39 @@ app.on('ready', function() {
 		settings.set('size', win.getSize());
 	});
 
+	electron.globalShortcut.register('Shift+Down', function() {
+		console.log('down');
+		win.webContents.executeJavaScript(`
+			window.$('.livesplit-container .layout').click();
+			0;
+		`);
+	});
+
+	electron.globalShortcut.register('Shift+Up', function() {
+		console.log('up');
+		win.webContents.executeJavaScript(`
+			window.$('i.fa-times').parent().click();
+			0;
+		`);
+	});
+
+	electron.globalShortcut.register('Shift+Right', function() {
+		console.log('right');
+		win.webContents.executeJavaScript(`
+			window.$('i.fa-arrow-down').parent().click();
+			0;
+		`);
+	});
+
+	electron.globalShortcut.register('Shift+Left', function() {
+		console.log('left');
+		win.webContents.executeJavaScript(`
+			window.$('i.fa-arrow-up').parent().click();
+			0;
+		`);
+	});
+
+
 	win.loadURL('https://one.livesplit.org/');
 });
 

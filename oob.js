@@ -15,5 +15,5 @@ function applyStyle() {
 	               .css('width', '100%');
 }
 
-var $ = require('jquery');
+var $ = window.$ = require('jquery');
 applyStyle();
