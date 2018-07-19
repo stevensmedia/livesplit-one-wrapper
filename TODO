@@ -1,6 +1,5 @@
 - Override the CSS:
  - Fonts
- - Width
  - Menu
-- Global hotkeys
+- Configuration for global hotkeys
 - Handle 'save before close' warnings

@@ -8,6 +8,9 @@ function applyStyle() {
 	$('.layout').css('width', 'auto');
 	$('.buttons').css('width', 'auto');
 	$('.buttons').css('text-align', 'center');
+	$('.buttons').css('position', 'fixed');
+	$('.buttons').css('bottom', '0%');
+	$('.buttons').css('width', '100%');
 	$('.buttons > .small').css('display', 'inline-block');
 	$('.buttons > .small').css('width', '48%');
 	$('.buttons > .small > button').css('width', '48%');
