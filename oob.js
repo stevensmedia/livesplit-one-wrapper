@@ -1,3 +1,4 @@
+var applyStyleBound = false;
 function applyStyle() {
 	if(!$('.livesplit-container').length) {
 		setTimeout(applyStyle, 1);
@@ -13,6 +14,13 @@ function applyStyle() {
 	$('svg.Timer0').attr('viewBox', '0 0 300 60')
 	               .attr('preserveAspectRatio', 'xMaxYMin meet')
 	               .css('width', '100%');
+
+	if(!applyStyleBound) {
+		applyStyleBound = true;
+		$('.livesplit-container').bind('DOMSubtreeModified', function(e) {
+			applyStyle();
+		});
+	}
 }
 
 var $ = window.$ = require('jquery');
