@@ -29,36 +29,36 @@ app.on('ready', function() {
 		settings.set('size', win.getSize());
 	});
 
-	electron.globalShortcut.register('Shift+Down', function() {
-		console.log('down');
+	var click = function(target) {
+		var encoded = JSON.stringify(target);
 		win.webContents.executeJavaScript(`
-			window.$('.livesplit-container .layout').click();
+			window.$(${encoded}).click();
 			0;
 		`);
+	};
+
+	var clickParent = function(target) {
+		var encoded = JSON.stringify(target);
+		win.webContents.executeJavaScript(`
+			window.$(${encoded}).parent().click();
+			0;
+		`);
+	};
+
+	electron.globalShortcut.register('Shift+Down', function() {
+		click('.livesplit-container .layout');
 	});
 
 	electron.globalShortcut.register('Shift+Up', function() {
-		console.log('up');
-		win.webContents.executeJavaScript(`
-			window.$('i.fa-times').parent().click();
-			0;
-		`);
+		clickParent('i.fa-times');
 	});
 
 	electron.globalShortcut.register('Shift+Right', function() {
-		console.log('right');
-		win.webContents.executeJavaScript(`
-			window.$('i.fa-arrow-down').parent().click();
-			0;
-		`);
+		clickParent('i.fa-arrow-down');
 	});
 
 	electron.globalShortcut.register('Shift+Left', function() {
-		console.log('left');
-		win.webContents.executeJavaScript(`
-			window.$('i.fa-arrow-up').parent().click();
-			0;
-		`);
+		clickParent('i.fa-arrow-up');
 	});
 
 
