@@ -4,6 +4,7 @@ function applyStyle() {
 		setTimeout(applyStyle, 1);
 		return;
 	}
+	window.onbeforeunload = null;
 	$('.livesplit-container > div').css('margin', '0');
 	$('.layout').css('width', 'auto');
 	$('.buttons').css('width', 'auto');
