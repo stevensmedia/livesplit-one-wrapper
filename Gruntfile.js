@@ -1,32 +1,49 @@
 var execSync = require('child_process').execSync;
+var fs = require('fs');
+var path = require('path');
+
+function fileModifiedTime(file) {
+	try {
+		var stat = fs.statSync(file);
+		var ret = Date.parse(stat.mtime);
+		return ret;
+	}
+	catch(err) {
+		return false;
+	}
+}
 
 function createIcnsFile(grunt, source, name, location) {
-	var iconset = 'build/' + name + '.iconset';
-	execSync('mkdir -p ' + iconset);
+	var target = path.join(location, name + ".icns");
+	var sourceModified = fileModifiedTime(source);
+	var targetModified = fileModifiedTime(target);
+	if(!targetModified || targetModified < sourceModified) {
+		var iconset = 'build/' + name + '.iconset';
+		execSync('mkdir -p ' + iconset);
 
-	var sizes = {};
-	for(size of [16, 32, 128, 256, 512]) {
-		sizes['' + size + 'x' + size] = size;
-	}
-	for(size of [16, 32, 128, 256, 512]) {
-		sizes['' + size + 'x' + size + '@2x'] = size * 2;
-	}
+		var sizes = {};
+		for(size of [16, 32, 128, 256, 512]) {
+			sizes['' + size + 'x' + size] = size;
+		}
+		for(size of [16, 32, 128, 256, 512]) {
+			sizes['' + size + 'x' + size + '@2x'] = size * 2;
+		}
 
-	for(key in sizes) {
-		var val = sizes[key];
-		var cmd = 'sips -z ' + val + ' ' + val + ' ' +
-		           source +
-		           ' --out ' + iconset + '/' +
-		           name + '_' + key + '.png';
+		for(key in sizes) {
+			var val = sizes[key];
+			var out = path.join(iconset, name + '_' + key + '.png');
+			var cmd = 'sips -z ' + val + ' ' + val + ' ' +
+		           	 source + ' --out ' + out;
+			grunt.log.write(cmd + "\n");
+			execSync(cmd);
+		}
+
+		var cmd = 'iconutil -c icns ' +
+		          '--output ' + target + ' '
+		          + iconset;
 		grunt.log.write(cmd + "\n");
 		execSync(cmd);
 	}
-
-	var cmd = 'iconutil -c icns ' +
-	          '--output ' + location + '/' + name + '.icns '
-	          + iconset;
-	grunt.log.write(cmd + "\n");
-	execSync(cmd);
 }
 
 module.exports = function(grunt) {
@@ -49,14 +66,15 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: {
-			clean: ['build/']
+			electron: ['build/Livesplit One-darwin-x64'],
+			all: ['build/'],
 		}
 	});
 
 	var default_tasks = [
-		'clean',
 		'appicon',
-		'electron:mac'
+		'clean:electron',
+		'electron:mac',
 	];
 
 	grunt.registerTask('appicon', 'Create app icon', function() {
