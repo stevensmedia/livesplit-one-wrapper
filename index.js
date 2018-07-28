@@ -6,6 +6,19 @@ const path = require('path')
 var app = electron.app;
 var win;
 
+ipc.on('rightclick', function(event, arg) {
+	event = {
+		type:'mouseDown',
+		x: 0,
+		y: 0,
+		button: 'right',
+		clickCount: 1,
+	};
+	win.webContents.sendInputEvent(event);
+	event.type = 'mouseUp',
+	win.webContents.sendInputEvent(event);
+});
+
 app.on('ready', function() {
 	/* MacOS dock icon */
 	app.dock.setIcon(path.join(__dirname, 'icon.png'));

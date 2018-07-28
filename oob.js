@@ -59,12 +59,10 @@ function oobSetup() {
 	var buttons = '<div class="small"><button id="contextmenu-button">⚙️</button><button id="wrapper-button">⌘</button></div>';
 	$('.buttons').append($(buttons));
 	$('#contextmenu-button').click(function() {
-		console.log('contextmenu-button click');
-		$('.livesplit-contaner .layout').contextmenu();
+		ipc.send('rightclick');
 	});
 	$('#wrapper-button').click(function() {
-		console.log('contextmenu-button click');
-		$('.livesplit-contaner .layout').contextmenu();
+		console.log('wrappermenu-button click');
 	});
 }
 
