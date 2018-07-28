@@ -56,7 +56,7 @@ function oobSetup() {
 	$('body').append($(dialog));
 
 	/* Adding our own buttons */
-	var buttons = '<div class="small"><button id="contextmenu-button">⚙️</button><button id="wrapper-button">⌘</button></div>';
+	var buttons = '<div class="small"><button class="fa" id="contextmenu-button">⚙️</button><button class="fa" id="wrapper-button">⌘</button></div>';
 	$('.buttons').append($(buttons));
 	$('#contextmenu-button').click(function() {
 		ipc.send('rightclick');
