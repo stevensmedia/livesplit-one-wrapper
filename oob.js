@@ -52,18 +52,22 @@ function oobSetup() {
 	});
 
 	/* Adding our own configuration dialog */
-	var dialog = '<div id="wrapper-dialog"></div>';
-	$('body').append($(dialog));
+	ipc.once('dialog', function(event, args) {
+		$('body').append($(args.data));
+	});
+	ipc.send('readdialog');
 
 	/* Adding our own buttons */
-	var buttons = '<div class="small"><button class="fa" id="contextmenu-button">⚙️</button><button class="fa" id="wrapper-button">⌘</button></div>';
-	$('.buttons').append($(buttons));
-	$('#contextmenu-button').click(function() {
-		ipc.send('rightclick');
+	ipc.once('buttons', function(event, args) {
+		$('.buttons').append($(args.data));
+		$('#contextmenu-button').click(function() {
+			ipc.send('rightclick');
+		});
+		$('#wrapper-button').click(function() {
+			console.log('wrappermenu-button click');
+		});
 	});
-	$('#wrapper-button').click(function() {
-		console.log('wrappermenu-button click');
-	});
+	ipc.send('readbuttons');
 }
 
 /* Go! */

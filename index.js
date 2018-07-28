@@ -1,11 +1,32 @@
-const electron = require('electron')
-const settings = require('electron-settings')
-const ipc = electron.ipcMain
-const path = require('path')
+const electron = require('electron');
+const fs = require('fs');
+const settings = require('electron-settings');
+const ipc = electron.ipcMain;
+const path = require('path');
 
 var app = electron.app;
 var win;
 
+/* Read the button bar html for the renderer */
+ipc.on('readbuttons', function(event, arg) {
+	filename = path.join(__dirname, 'buttons.html');
+	fs.readFile(filename, 'utf8', function(err, data) {
+		data = data.replace(/^\s*/gm, '');
+		data = data.replace(/\n/g, '');
+		console.log(data);
+		win.webContents.send('buttons', {data: data});
+	});
+});
+
+/* Read the config dialog html for the renderer */
+ipc.on('readdialog', function(event, arg) {
+	filename = path.join(__dirname, 'config.html');
+	fs.readFile(filename, 'utf8', function(err, data) {
+		win.webContents.send('dialog', {data: data});
+	});
+});
+
+/* The renderer process wants us to send a right click */
 ipc.on('rightclick', function(event, arg) {
 	event = {
 		type:'mouseDown',
@@ -14,8 +35,10 @@ ipc.on('rightclick', function(event, arg) {
 		button: 'right',
 		clickCount: 1,
 	};
+	/* Mouse down */
 	win.webContents.sendInputEvent(event);
 	event.type = 'mouseUp',
+	/* Mouse up */
 	win.webContents.sendInputEvent(event);
 });
 
