@@ -1,6 +1,16 @@
-const ipcRenderer = require('electron').ipcRenderer;
+const ipc = require('electron').ipcRenderer;
 var $ = window.$ = require('jquery');
 
+/* Receive a click from the app process */
+ipc.on('click', function(event, arg) {
+	var tgt = $(arg.target);
+	if(arg.parent) {
+		tgt = tgt.parent();
+	}
+	tgt.click();
+});
+
+/* Apply our CSS changes that need to happen every time LSO redraws */
 function oobCSSChanges() {
 	/* The window doesn't need a margin */
 	$('.livesplit-container > div').css('margin', '0');
@@ -22,10 +32,11 @@ function oobCSSChanges() {
 	$('.buttons > .small > button').css('width', '48%');
 }
 
+/* Install our custom changes */
 function oobSetup() {
 	/* Keep trying until LSO is actually loaded */
 	if(!$('.livesplit-container').length) {
-		setTimeout(oobSetup, 1);
+		setTimeout(oobSetup, 10);
 		return;
 	}
 
@@ -55,7 +66,7 @@ function oobSetup() {
 		console.log('contextmenu-button click');
 		$('.livesplit-contaner .layout').contextmenu();
 	});
-
 }
 
+/* Go! */
 oobSetup();

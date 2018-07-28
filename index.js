@@ -1,5 +1,6 @@
 const electron = require('electron')
 const settings = require('electron-settings')
+const ipc = electron.ipcMain
 const path = require('path')
 
 var app = electron.app;
@@ -35,40 +36,21 @@ app.on('ready', function() {
 		settings.set('size', win.getSize());
 	});
 
-	/* This function passes a click to a selector the render process */
-	var click = function(target) {
-		var encoded = JSON.stringify(target);
-		win.webContents.executeJavaScript(`
-			window.$(${encoded}).click();
-			/* Electron can't handle jQuery. Return something simple. */
-			0;
-		`);
-	};
-
-	/* This function passes a click to a selector's PARENT in the render process */
-	var clickParent = function(target) {
-		var encoded = JSON.stringify(target);
-		win.webContents.executeJavaScript(`
-			window.$(${encoded}).parent().click();
-			0;
-		`);
-	};
-
-	/* Global hotkeys*/
+	/* Global hotkeys */
 	electron.globalShortcut.register('Shift+Down', function() {
-		click('.livesplit-container .layout');
+		win.webContents.send('click', {target: '.livesplit-container .layout', parent: false});
 	});
 
 	electron.globalShortcut.register('Shift+Up', function() {
-		clickParent('i.fa-times');
+		win.webContents.send('click', {target: 'i.fa-times', parent: true});
 	});
 
 	electron.globalShortcut.register('Shift+Right', function() {
-		clickParent('i.fa-arrow-down');
+		win.webContents.send('click', {target: 'i.fa-arrow-down', parent: true});
 	});
 
 	electron.globalShortcut.register('Shift+Left', function() {
-		clickParent('i.fa-arrow-up');
+		win.webContents.send('click', {target: 'i.fa-arrow-up', parent: true});
 	});
 
 	/* Go! */
