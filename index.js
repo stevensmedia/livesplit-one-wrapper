@@ -13,7 +13,6 @@ ipc.on('readbuttons', function(event, arg) {
 	fs.readFile(filename, 'utf8', function(err, data) {
 		data = data.replace(/^\s*/gm, '');
 		data = data.replace(/\n/g, '');
-		console.log(data);
 		win.webContents.send('buttons', {data: data});
 	});
 });
