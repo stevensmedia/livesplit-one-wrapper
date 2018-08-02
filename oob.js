@@ -1,4 +1,5 @@
-const ipc = require('electron').ipcRenderer;
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 var $ = window.$ = require('jquery');
 
 /* Receive a click from the app process */
@@ -12,6 +13,9 @@ ipc.on('click', function(event, arg) {
 
 /* Apply our CSS changes that need to happen every time LSO redraws */
 function oobCSSChanges() {
+	/* Don't do weird scrolling */
+	$('body').css('overflow', 'hidden');
+
 	/* The window doesn't need a margin */
 	$('.livesplit-container > div').css('margin', '0');
 
@@ -43,6 +47,9 @@ function oobSetup() {
 	/* We need to do this so the window will actually be closeable */
 	window.onbeforeunload = null;
 
+	/* don't do weird zooming */
+	electron.webFrame.setVisualZoomLevelLimits(1, 1);
+
 	/* Apply CSS */
 	oobCSSChanges();
 
@@ -63,8 +70,13 @@ function oobSetup() {
 		$('#contextmenu-button').click(function() {
 			ipc.send('rightclick');
 		});
+		$('#wrapper-dialog-overlay').click(function() {
+			$('#wrapper-dialog-overlay').animate({opacity: 0}, 300).hide(300);
+			$('#wrapper-dialog').animate({left: '100%'}, 300).hide(300);
+		});
 		$('#wrapper-button').click(function() {
-			console.log('wrappermenu-button click');
+			$('#wrapper-dialog-overlay').show().animate({opacity: 0.6}, 300);
+			$('#wrapper-dialog').show().animate({left: '50%'}, 300);
 		});
 	});
 	ipc.send('readbuttons');
