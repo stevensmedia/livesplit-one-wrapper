@@ -123,6 +123,7 @@ function oobSetup() {
 			hide_wrapper_dialog();
 		});
 		$('#wrapper-dialog .buttonrow .cancel').click(function() {
+			oobInitializeSettings();
 			hide_wrapper_dialog();
 		});
 		oobInitializeSettings();
