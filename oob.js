@@ -36,23 +36,23 @@ function oobCSSChanges() {
 	$('.buttons > .small > button').css('width', '48%');
 }
 
-function oobCookieValue(arg) {
-	var ret = localStorage.getItem(arg);
-	if(!ret || ret == 'undefined') {
-		return '';
-	} else {
-		return ret;
-	}
-}
-
 function oobInitializeSettings() {
-	$('#startsplit-hotkey').attr('value', oobCookieValue('startsplit-hotkey'));
-	$('#reset-hotkey').attr('value', oobCookieValue('startsplit-hotkey'));
-	$('#back-hotkey').attr('value', oobCookieValue('startsplit-hotkey'));
-	$('#skip-hotkey').attr('value', oobCookieValue('startsplit-hotkey'));
-	$('#timer-font').attr('value', oobCookieValue('timer-font'));
-	$('#splits-font').attr('value', oobCookieValue('splits-font'));
-	$('#title-font').attr('value', oobCookieValue('title-font'));
+	var getVal = function(arg) {
+		var ret = localStorage.getItem(arg);
+		if(!ret || ret == 'undefined') {
+			return '';
+		} else {
+			return ret;
+		}
+	};
+
+	$('#startsplit-hotkey').attr('value', getVal('startsplit-hotkey'));
+	$('#reset-hotkey').attr('value', getVal('startsplit-hotkey'));
+	$('#back-hotkey').attr('value', getVal('startsplit-hotkey'));
+	$('#skip-hotkey').attr('value', getVal('startsplit-hotkey'));
+	$('#timer-font').attr('value', getVal('timer-font'));
+	$('#splits-font').attr('value', getVal('splits-font'));
+	$('#title-font').attr('value', getVal('title-font'));
 }
 
 function oobUpdateSettings() {
