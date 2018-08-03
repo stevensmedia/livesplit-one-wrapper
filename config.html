@@ -1,38 +1,71 @@
 <div id="wrapper-dialog">
+	<div class="buttonrow">
+		<button class="save">Save</button>
+		<button class="cancel">Cancel</button>
+	</div>
 	<h2>Fonts</h2>
 	<p>
 		<label for="timer-font">Timer Font</label>
-		<select class="font" id="timer-font"></select>
+		<input type="text" class="font" id="timer-font" placeholder="fira, sans-serif"></input>
 	</p>
 	<p>
 		<label for="splits-font">Splits Font</label>
-		<select class="font" id="splits-font"></select>
+		<input type="text" class="font" id="splits-font" placeholder="fira, sans-serif"></input>
 	</p>
 	<p>
 		<label for="title-font">Title Font</label>
-		<select class="font" id="title-font"></select>
-	</p>
-	<p>
-		<label for="title-font">Title Font</label>
-		<select class="font" id="title-font"></select>
+		<input type="text" class="font" id="title-font" placeholder="fira, sans-serif"></input>
 	</p>
 	<h2>Hotkeys</h2>
 	<p>
 		<label for="startsplit-hotkey">Start/Split</label>
-		<input type="text" class="hotkey" id="startsplit-hotkey"></input>
+		<input type="text" class="hotkey" id="startsplit-hotkey" placeholder="Shift+Down"></input>
 	</p>
 	<p>
-		<label for="startsplit-hotkey">Reset</label>
-		<input type="text" class="hotkey" id="reset-hotkey"></input>
+		<label for="reset-hotkey">Reset</label>
+		<input type="text" class="hotkey" id="reset-hotkey" placeholder="Shift+Up"></input>
 	</p>
 	<p>
 		<label for="back-hotkey">Back</label>
-		<input type="text" class="hotkey" id="back-hotkey"></input>
+		<input type="text" class="hotkey" id="back-hotkey" placeholder="Shift+Left"></input>
 	</p>
 	<p>
 		<label for="skip-hotkey">Skip</label>
-		<input type="text" class="hotkey" id="back-hotkey"></input>
+		<input type="text" class="hotkey" id="skip-hotkey" placeholder="Shift+Right"></input>
 	</p>
+	<h3>Available Modifiers</h3>
+	<ul>
+		<li>Command (or Cmd for short)</li>
+		<li>Control (or Ctrl for short)</li>
+		<li>CommandOrControl (or CmdOrCtrl for short)</li>
+		<li>Alt</li>
+		<li>Option</li>
+		<li>AltGr</li>
+		<li>Shift</li>
+		<li>Super</li>
+	</ul>
+	<h3>Available key codes</h3>
+	<ul>
+		<li>0 to 9</li>
+		<li>A to Z</li>
+		<li>F1 to F24</li>
+		<li>Punctuations like ~, !, @, #, $, etc.</li>
+		<li>Plus</li>
+		<li>Space</li>
+		<li>Tab</li>
+		<li>Backspace</li>
+		<li>Delete</li>
+		<li>Insert</li>
+		<li>Return (or Enter as alias)</li>
+		<li>Up, Down, Left and Right</li>
+		<li>Home and End</li>
+		<li>PageUp and PageDown</li>
+		<li>Escape (or Esc for short)</li>
+		<li>VolumeUp, VolumeDown and VolumeMute</li>
+		<li>MediaNextTrack, MediaPreviousTrack, MediaStop and MediaPlayPause</li>
+		<li>PrintScreen</li>
+	</ul>
+
 </div>
 <div id="wrapper-dialog-overlay">
 </div>
@@ -47,10 +80,12 @@
 		background: #000000;
 		margin: 0 0 0 4px;
 		padding: 0;
+		overflow: scroll;
+		line-height: 1.1;
 	}
 
 	#wrapper-dialog h2 {
-		margin-top: 4px;
+		margin: 12px 0;
 	}
 
 	#wrapper-dialog-overlay {

@@ -25,6 +25,26 @@ ipc.on('readdialog', function(event, arg) {
 	});
 });
 
+ipc.on('sethotkeys', function(event, arg) {
+	/* Global hotkeys */
+	electron.globalShortcut.unregisterAll();
+	electron.globalShortcut.register(arg.start, function() {
+		win.webContents.send('click', {target: '.livesplit-container .layout', parent: false});
+	});
+
+	electron.globalShortcut.register(arg.reset, function() {
+		win.webContents.send('click', {target: 'i.fa-times', parent: true});
+	});
+
+	electron.globalShortcut.register(arg.skip, function() {
+		win.webContents.send('click', {target: 'i.fa-arrow-down', parent: true});
+	});
+
+	electron.globalShortcut.register(arg.back, function() {
+		win.webContents.send('click', {target: 'i.fa-arrow-up', parent: true});
+	});
+});
+
 /* The renderer process wants us to send a right click */
 ipc.on('rightclick', function(event, arg) {
 	event = {
@@ -69,23 +89,6 @@ app.on('ready', function() {
 	/* Make sure to save that window size for next time */
 	win.on('close', function() {
 		settings.set('size', win.getSize());
-	});
-
-	/* Global hotkeys */
-	electron.globalShortcut.register('Shift+Down', function() {
-		win.webContents.send('click', {target: '.livesplit-container .layout', parent: false});
-	});
-
-	electron.globalShortcut.register('Shift+Up', function() {
-		win.webContents.send('click', {target: 'i.fa-times', parent: true});
-	});
-
-	electron.globalShortcut.register('Shift+Right', function() {
-		win.webContents.send('click', {target: 'i.fa-arrow-down', parent: true});
-	});
-
-	electron.globalShortcut.register('Shift+Left', function() {
-		win.webContents.send('click', {target: 'i.fa-arrow-up', parent: true});
 	});
 
 	/* Go! */
