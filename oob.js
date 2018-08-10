@@ -81,8 +81,8 @@ function oobUpdateSettings() {
 	var hotkeys = {
 		start: getVal('#startsplit-hotkey'),
 		reset: getVal('#reset-hotkey'),
-		skip: getVal('#back-hotkey'),
-		back: getVal('#skip-hotkey'),
+		skip: getVal('#skip-hotkey'),
+		back: getVal('#back-hotkey'),
 	}
 	ipc.send('sethotkeys', hotkeys);
 	$('.timer-time').css('font-family', getVal('#timer-font'));
