@@ -90,6 +90,7 @@ function oobUpdateSettings() {
 	var x = $('.timer-time').last()[0].getBBox().x + 'px'
 	$('.timer-time').first().attr('x', x);
 	$('.split').css('font-family', getVal('#splits-font'));
+	$('.split-delta').css('font-family', getVal('#splits-font'));
 	$('.title-text').css('font-family', getVal('#title-font'));
 }
 
